@@ -1,5 +1,5 @@
 (defproject com.taoensso.examples/sente "1.8.1"
-  :description "Sente, reference web-app example project"
+  :description "Sente, reference web-app example project. Modified."
   :url "https://github.com/ptaoussanis/sente"
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"
@@ -40,9 +40,10 @@
   :plugins
   [[lein-pprint         "1.1.2"]
    [lein-ancient        "0.6.10"]
-   [com.cemerick/austin "0.1.6"]
+   ;[com.cemerick/austin "0.1.6"]
    [lein-cljsbuild      "1.1.3"]
    [cider/cider-nrepl   "0.11.0"] ; Optional, for use with Emacs
+   [lein-zip "0.1.1"]
    ]
 
   :cljsbuild
@@ -54,6 +55,9 @@
                 :pretty-print true}}]}
 
   :main example.server
+  :aot :all
+  :hooks [leiningen.cljsbuild]
+  :zip ["Dockerrun.aws.json" "proxy/" ".ebextensions/"]
 
   ;; Call `lein start-repl` to get a (headless) development repl that you can
   ;; connect to with Cider+emacs or your IDE of choice:

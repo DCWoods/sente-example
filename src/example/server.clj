@@ -2,6 +2,8 @@
   "Official Sente reference example: server"
   {:author "Peter Taoussanis (@ptaoussanis)"}
 
+  (:gen-class :main true)
+
   (:require
    [clojure.string     :as str]
    [ring.middleware.defaults]
@@ -205,7 +207,7 @@
     (reset! web-server_ server-map)))
 
 (defn stop!  []  (stop-router!)  (stop-web-server!))
-(defn start! [] (start-router!) (start-web-server!) (start-example-broadcaster!))
+(defn start! [] (start-router!) (start-web-server! 8080) (start-example-broadcaster!))
 ;; (defonce _start-once (start!))
 
 (defn -main "For `lein run`, etc." [] (start!))
