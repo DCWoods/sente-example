@@ -13,7 +13,7 @@ To the `project.clj` file:
 
 * add `:aot :all`
 * add `:hooks [leiningen.cljsbuild]` so that the clojurescript is compiled when the uberjar is built
-* comment the austin plugin to avoid errors `;[com.cemerick/austin "0.1.6"]
+* comment the austin plugin to avoid errors `;[com.cemerick/austin "0.1.6"]`
 
 To the `src/example/server.clj` file:
 
