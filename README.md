@@ -181,6 +181,7 @@ This file defines two docker containers, one for the app and one for the Nginx r
 
       set_real_ip_from 0.0.0.0/0;
       real_ip_header   proxy_protocol;
+      real_ip_recursive on;
 
       access_log  /var/log/nginx/access.log  elb_log;
 
@@ -191,7 +192,9 @@ This file defines two docker containers, one for the app and one for the Nginx r
         proxy_set_header  Connection         $proxy_connection;
         proxy_set_header  X-Real-IP          $proxy_protocol_addr;
         proxy_set_header  X-Forwarded-For    $proxy_protocol_addr;
-        proxy_set_header  Host               $http_host;
+        proxy_set_header  Host               $host;
+        proxy_set_header  X-Forwarded-Proto  http;
+        proxy_set_header  X-NginX-Proxy      true;
       }
     }
 
