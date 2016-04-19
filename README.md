@@ -197,7 +197,12 @@ This file defines two docker containers, one for the app and one for the Nginx r
 
 This is our best attempt at the appropriate nginx config to get websockets working behind Elastic Beanstalk using proxy protocol.
 
-Next we need to zip all the required files into a zip archive to upload to AWS. To assist with this we add the following to the `project.clj` file:
+Then we need to let the webapp know that we are behind a proxy. Change the body of the `main-ring-handler` function in the `src/example/server.clj` file to be:
+
+    (ring.middleware.defaults/wrap-defaults
+      ring-routes (assoc ring.middleware.defaults/site-defaults :proxy true)))
+
+We need to zip all the required files into a zip archive to upload to AWS. To assist with this we add the following to the `project.clj` file:
 
     :zip ["Dockerrun.aws.json" "proxy/" ".ebextensions/"]
 
@@ -226,4 +231,4 @@ Now, go to the Elastic Beanstalk admin page and create a new project, and use th
 
 The environment will take a few minutes to be created, and then the sente-example app should be available at the URL chosen: [http://sente-example-env.ap-southeast-2.elasticbeanstalk.com](http://sente-example-env.ap-southeast-2.elasticbeanstalk.com/).
 
-You can reload the page and it randomly selects an ajax connection or a websockets connection. Note that with the current setup the ajax connection works fine, but the websockets connection does not work, for an unknown reason.
+You can reload the page and it randomly selects an ajax connection or a websockets connection.

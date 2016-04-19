@@ -122,7 +122,7 @@
   `ring.middleware.defaults/wrap-defaults` - but you'll need to ensure
   that they're included yourself if you're not using `wrap-defaults`."
   (ring.middleware.defaults/wrap-defaults
-    ring-routes ring.middleware.defaults/site-defaults))
+    ring-routes (assoc ring.middleware.defaults/site-defaults :proxy true)))
 
 ;;;; Sente event handlers
 
